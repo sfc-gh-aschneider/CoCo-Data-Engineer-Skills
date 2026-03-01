@@ -1,0 +1,30 @@
+Goals: 
+1) Build an economic & environmental data product combining World Bank indicators and OWID emissions data, published to the Internal Marketplace and an Intelligence AI Agent
+2) Intelligence Agent: Include metrics for: totals, averages, carbon intensity (CO2/GDP), and YoY growth rates.
+
+
+Sources (CExternal Access Integrations):
+- World Bank API: api.worldbank.org
+- OWID CSV: raw.githubusercontent.com
+
+Metrics to include in IL:
+- OWID: co2, co2_per_capita, methane, population, gdp, energy_per_capita
+- World Bank (date range 2018-2023 only): 
+  - NY.GDP.MKTP.CD (GDP nominal, current US$)
+  - NY.GDP.PCAP.CD (GDP per capita, current US$)
+  - EG.ELC.RNEW.ZS (Renewable electricity output, % of total)
+
+Process:
+1) Read Data-Engineering-Spec/ folder (all files)
+2) Build layers sequentially: Bronze → Silver → Gold → Share → Tasks → Data Quality → Intelligence
+3) For each object: save SQL to ETL/ first, then execute
+4) After each layer: 
+   - Re-read the spec template
+   - List required CTEs and columns from template
+   - Compare your SQL against that list
+   - Fix deviations BEFORE executing
+5) Rule: Templates are exact - replace <placeholders> only. Do NOT paraphrase or simplify templates.
+6) Run validations before finishing:
+   - CODE: DESCRIBE each Dynamic Table creation verify all template columns exist (T1_SK, T2_SK, IS_ORPHAN, etc.)
+   - DATA: Run ETL/DQ/Domain-DQ-Validation.sql - all checks must PASS
+   - Fix any failures before declaring complete
