@@ -65,6 +65,3 @@ ETL/
 - Snowflake Enterprise Edition (for DMFs)
 - ACCOUNTADMIN to allow External Access Integrations (if required)
 
-## License
-
-MIT
