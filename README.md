@@ -11,10 +11,10 @@ A template-driven framework for building production-ready data products in Snowf
 Bronze (RAW + PSA)     Silver (IL)           Gold (PL)           Share
 ─────────────────────────────────────────────────────────────────────────
 RAW_<SOURCE>           <DOMAIN>_DB           <DOMAIN>_DB         Internal
-├── .API (UDFs)        └── .IL               ├── .PL             Marketplace
-├── .RAW (landing)         ├── *_DIM DT      │   ├── *_DIM       Listing
-├── .PSA (staging)         └── *_FACT DT     │   ├── *_FACT      
-├── .ORPHAN                                  │   └── RPT_*       
+├── .API (UDFs)        ├── .IL               ├── .PL             Marketplace
+├── .RAW (landing)     │   ├── *_DIM DT      │   ├── *_DIM       Listing
+├── .PSA (staging)     │   └── *_FACT DT     │   ├── *_FACT      
+├── .ORPHAN            └── .DQ (DMFs)        │   └── RPT_*       
 ├── .DQ (DMFs)                               └── .SHARE (secure)
 └── .ETL (procs)
 ```
@@ -43,7 +43,7 @@ RAW_<SOURCE>           <DOMAIN>_DB           <DOMAIN>_DB         Internal
    - `BATCH_SCHEDULE` - when ETL runs
    - `ETL_WAREHOUSE` - warehouse for tasks
 3. Run as **SYSADMIN**. First execute `Account-Admin.sql` to grant required privileges
-4. Open **Cortex Code** and describe your build. See `CoCo-Prompt.txt` for an example prompt
+4. Open **Cortex Code** and describe your build. See `CoCo-WorldBank-Prompt.txt` for an example prompt
 
 ## File Structure
 
@@ -56,7 +56,7 @@ ETL/
 ├── IL-PL/PL-Star-Schema.sql
 ├── Share/Share-Listing.sql
 ├── Tasks/Tasks.sql
-├── DQ/<Source>-DQ.sql, Domain-DQ-Validation.sql
+├── DQ/<Source>-DQ.sql, <Domain>-DQ.sql, Domain-DQ-Validation.sql
 └── Intelligence/Semantic-View.sql, Agent-Setup.sql
 ```
 
