@@ -33,36 +33,6 @@ RAW_<SOURCE>           <DOMAIN>_DB           <DOMAIN>_DB         Internal
 | **Data Quality** | `07-DataQuality.md` | Custom DMFs + validation queries |
 | **Intelligence** | `08-Intelligence.sql` | Semantic View + Cortex Agent for natural language queries |
 
-## Key Patterns
-
-### PSA = Insert-Only
-- NO surrogate keys, NO SCD2 columns in PSA
-- Just source data + `HASH_DIFF` + `INS_TS`
-- Silver handles deduplication via `QUALIFY ROW_NUMBER()`
-
-### Dynamic Tables
-- Dimensions: `TARGET_LAG = 'DOWNSTREAM'`
-- Facts: `TARGET_LAG = '1 hour'` (balance freshness vs. compute)
-- Include `T1_SK`, `T2_SK`, `KEY`, `NK_*`, `IS_ORPHAN`, `IS_CURRENT`
-
-### Late-Arriving Dimensions
-- ORPHAN tables hold placeholder records
-- Detection procedure finds facts with NULL dimension keys
-- DT refresh incorporates orphans automatically
-
-### Organization Listing (Internal Marketplace)
-```sql
-CREATE ORGANIZATION LISTING <name>
-SHARE <share_name> AS
-$$
-title: "..."
-description: |
-  ## Business Description
-  ...
-organization_profile: "INTERNAL"
-...
-$$;
-```
 
 ## Usage
 
