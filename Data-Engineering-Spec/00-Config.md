@@ -16,16 +16,14 @@ DT_LAG_FACTS: "1 hour"              # Balance freshness vs compute costs
 
 ## Naming Conventions
 
-| Variable | Used In |
-|----------|---------|
-| `DOMAIN` | `<DOMAIN>_DB` (database), `<DOMAIN>_DATA_SHARE` (share), listings |
-| `SOURCES` | `RAW_<SOURCE>` (databases), task names, procedure names |
-| `BATCH_NAME` | `<BATCH>_KICKOFF_TASK`, `<BATCH>_RAW_WAIT_TASK`, etc. |
+| Pattern | Example |
+|---------|---------|
+| `<DOMAIN>_DB` | `FINANCE_DB`, `SALES_DB` |
+| `<DOMAIN>_DATA_SHARE` | `FINANCE_DATA_SHARE` |
+| `RAW_<SOURCE>` | `RAW_WB`, `RAW_CRM`, `RAW_STRIPE` |
+| `<BATCH>_KICKOFF_TASK` | `DAILY_KICKOFF_TASK` |
 
-**Example with `DOMAIN: "SALES"` and `SOURCES: ["CRM", "ERP"]`:**
-- Databases: `SALES_DB`, `RAW_CRM`, `RAW_ERP`
-- Share: `SALES_DATA_SHARE`
-- Tasks: `DAILY_KICKOFF_TASK`, `CRM_RAW_ORDERS_TASK`
+Source names (`RAW_<SOURCE>`) are chosen during Bronze layer build based on the systems you're integrating.
 
 ## Schedule Reference
 
