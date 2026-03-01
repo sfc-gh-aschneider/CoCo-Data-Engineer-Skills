@@ -63,8 +63,7 @@ ETL/
 ## Requirements
 
 - Snowflake Enterprise Edition (for DMFs)
-- ACCOUNTADMIN for External Access Integrations
-- Warehouse for ETL tasks
+- ACCOUNTADMIN to allow External Access Integrations (if required)
 
 ## License
 
