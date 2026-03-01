@@ -2,17 +2,32 @@
 
 Project-specific variables. Customize per environment.
 
-```yaml
+# Domain (used in main database naming conventions)
+DOMAIN: "FINANCE"                                  # → FINANCE_DB, FINANCE_DATA_SHARE, etc.
+
 # Orchestration
-BATCH_SCHEDULE: "USING CRON 0 6 * * * UTC"    # Daily 6 AM UTC
-ETL_WAREHOUSE: "ETL_WH"                        # Dedicated ETL warehouse
+BATCH_NAME: "DAILY"                             # → DAILY_KICKOFF_TASK, etc.
+BATCH_SCHEDULE: "Daily at 6:00 AM AEST"         # CRON: 0 6 * * * Australia/Melbourne
+ETL_WAREHOUSE: "ETL_WH"                         # Dedicated ETL warehouse
 
 # Dynamic Tables
-DT_LAG_DIMENSIONS: "DOWNSTREAM"                # Refresh when downstream needs
-DT_LAG_FACTS: "1 hour"                         # Balance freshness vs compute
-DT_REFRESH_MODE: "AUTO"
-DT_INITIALIZE: "ON_CREATE"
+DT_LAG_FACTS: "1 hour"                          # Balance freshness vs compute costs
 
-# Data Quality
-DQ_SEVERITY_LEVELS: [ERROR, WARNING, INFO]     # ERROR blocks pipeline
-```
+## Naming Convention Reference
+
+| Variable | Used In |
+|----------|---------|
+| `DOMAIN` | `<DOMAIN>_DB` (database), `<DOMAIN>_DATA_SHARE` (share), listings |
+| `SOURCES` | `RAW_<SOURCE>` (databases), task names, procedure names |
+| `BATCH_NAME` | `<BATCH>_KICKOFF_TASK`, `<BATCH>_RAW_WAIT_TASK`, etc. |
+
+**Example with `DOMAIN: "SALES"` and `SOURCES: ["CRM", "ERP"]`:**
+- Databases: `SALES_DB`, `RAW_CRM`, `RAW_ERP`
+- Share: `SALES_DATA_SHARE`
+- Tasks: `DAILY_KICKOFF_TASK`, `CRM_RAW_ORDERS_TASK`
+
+**Example Schedules:
+#   Daily 6 AM AEST    → USING CRON 0 6 * * * Australia/Melbourne
+#   Hourly             → 60 MINUTE
+#   Every 15 min       → 15 MINUTE
+#   Weekdays 8 AM      → USING CRON 0 8 * * 1-5 UTC
