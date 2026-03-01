@@ -36,10 +36,14 @@ RAW_<SOURCE>           <DOMAIN>_DB           <DOMAIN>_DB         Internal
 
 ## Usage
 
-1. Copy this spec folder to your Snowsight workspace
-2. Replace `<DOMAIN>`, `<SOURCE>`, `<ENTITY>` placeholders
-3. Build layers sequentially: Bronze → Silver → Gold → Share → Tasks → DQ → Intelligence
-4. Run `ETL/DQ/Domain-DQ-Validation.sql` to verify all checks pass
+1. Copy this spec folder to your Snowsight Workspace
+2. Update `00-Config.md` with your values:
+   - `DOMAIN` - your domain name (e.g., `"SALES"`, `"FINANCE"`)
+   - `BATCH_NAME` - task prefix (e.g., `"DAILY"`, `"HOURLY"`)
+   - `BATCH_SCHEDULE` - when ETL runs
+   - `ETL_WAREHOUSE` - warehouse for tasks
+3. Run as **SYSADMIN**. First execute `Account-Admin.sql` to grant required privileges
+4. Open **Cortex Code** and describe your build. See `CoCo-Prompt.txt` for an example prompt
 
 ## File Structure
 
