@@ -42,7 +42,7 @@ RAW_<SOURCE>           <DOMAIN>_DB           <DOMAIN>_DB         Internal
    - `BATCH_NAME` - task prefix (e.g., `"DAILY"`, `"HOURLY"`)
    - `BATCH_SCHEDULE` - when ETL runs
    - `ETL_WAREHOUSE` - warehouse for tasks
-3. Run as **SYSADMIN**. First execute `Account-Admin.sql` to grant required privileges
+3. Run as **SYSADMIN**. But first execute `Account-Admin.sql` to grant required privileges
 4. Open **Cortex Code** and describe your build. See `CoCo-WorldBank-Prompt.txt` for an example prompt
 
 ## File Structure
